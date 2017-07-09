@@ -721,7 +721,7 @@ run_menu (grub_menu_t menu, int nested, int *auto_boot)
 	      menu_set_chosen_entry (current_entry);
 	      break;
 
-	    case GRUB_TERM_KEY_UP:
+	    /* case GRUB_TERM_KEY_UP: */
 	    case GRUB_TERM_CTRL | 'p':
 	    case '^':
 	      if (current_entry > 0)
@@ -734,6 +734,8 @@ run_menu (grub_menu_t menu, int nested, int *auto_boot)
 	    case 'v':
 	      if (current_entry < menu->size - 1)
 		current_entry++;
+	      else
+		current_entry = 0;
 	      menu_set_chosen_entry (current_entry);
 	      break;
 
@@ -755,6 +757,7 @@ run_menu (grub_menu_t menu, int nested, int *auto_boot)
 	      menu_set_chosen_entry (current_entry);
 	      break;
 
+	    case GRUB_TERM_KEY_UP:
 	    case '\n':
 	    case '\r':
 	    case GRUB_TERM_KEY_RIGHT:
