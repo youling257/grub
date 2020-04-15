@@ -630,7 +630,11 @@ run_menu (grub_menu_t menu, int nested, int *auto_boot, int *notify_boot)
 	      timeout = -1;
 	      break;
 	    }
-
+	  if (key == GRUB_TERM_KEY_DOWN)
+	    {
+	      timeout = -1;
+	      break;
+	    }
 	  if (timeout > 0 && has_second_elapsed (&saved_time))
 	    {
 	      timeout--;
