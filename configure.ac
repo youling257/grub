@@ -1866,6 +1866,28 @@ fi
 AC_SUBST([LIBZFS])
 AC_SUBST([LIBNVPAIR])
 
+AC_ARG_ENABLE([quiet-boot],
+              [AS_HELP_STRING([--enable-quiet-boot],
+                              [emit fewer messages at boot time (default=no)])],
+              [], [enable_quiet_boot=no])
+if test x"$enable_quiet_boot" = xyes ; then
+  QUIET_BOOT=1
+else
+  QUIET_BOOT=0
+fi
+AC_SUBST([QUIET_BOOT])
+
+AC_ARG_ENABLE([quick-boot],
+              [AS_HELP_STRING([--enable-quick-boot],
+                              [bypass boot menu if possible (default=no)])],
+              [], [enable_quick_boot=no])
+if test x"$enable_quick_boot" = xyes ; then
+  QUICK_BOOT=1
+else
+  QUICK_BOOT=0
+fi
+AC_SUBST([QUICK_BOOT])
+
 LIBS=""
 
 AC_SUBST([FONT_SOURCE])
@@ -2122,6 +2144,11 @@ if test x"$liblzma_excuse" != x ; then
 echo "Without liblzma (no support for XZ-compressed mips images) ($liblzma_excuse)"
 else
 echo "With liblzma from $LIBLZMA (support for XZ-compressed mips images)"
+fi
+if [ x"$enable_quiet_boot" = xyes ]; then
+echo With quiet boot: Yes
+else
+echo With quiet boot: No
 fi
 echo "*******************************************************"
 ]
